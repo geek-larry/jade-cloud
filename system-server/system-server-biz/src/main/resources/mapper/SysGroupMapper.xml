@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jade.system.biz.mapper.SysGroupMapper">
+    <resultMap id="BaseResultMap" type="com.jade.system.api.domain.SysGroup">
+        <id column="group_id" property="groupId" />
+        <result column="group_name" property="groupName" />
+        <result column="group_code" property="groupCode" />
+        <result column="group_desc" property="groupDesc" />
+        <result column="del_flag" property="delFlag" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_by" property="createBy" />
+        <result column="update_by" property="updateBy" />
+    </resultMap>
+    <select id="listGroupsByUserId" resultMap="BaseResultMap">
+        SELECT g.group_id,
+               g.group_name,
+               g.group_code,
+               g.group_desc,
+               g.del_flag,
+               g.create_time,
+               g.update_time,
+               g.update_by,
+               g.create_by
+        FROM sys_group g,
+             sys_user_group ur
+        WHERE g.group_id = ur.group_id
+          AND g.del_flag = 0
+          and ur.user_id = #{userId}
+    </select>
+</mapper>

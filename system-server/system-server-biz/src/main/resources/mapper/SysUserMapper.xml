@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jade.system.biz.mapper.SysUserMapper">
+    <resultMap id="baseResultMap" type="com.jade.system.api.domain.vo.UserVO">
+        <id column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="real_name" property="realName" />
+        <result column="password" property="password" />
+        <result column="avatar" property="avatar" />
+        <result column="email" property="email" />
+        <result column="dept" property="dept" />
+        <result column="status" property="status" />
+        <result column="udel_flag" property="delFlag" />
+        <result column="ucreate_time" property="createTime" />
+        <result column="uupdate_time" property="updateTime" />
+        <collection property="roleList" ofType="com.jade.system.api.domain.SysRole" select="com.jade.system.biz.mapper.SysRoleMapper.listRolesByUserId" column="user_id"></collection>
+    </resultMap>
+    <resultMap id="userVoResultMap" type="com.jade.system.api.domain.vo.UserVO">
+        <id column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="real_name" property="realName" />
+        <result column="password" property="password" />
+        <result column="avatar" property="avatar" />
+        <result column="email" property="email" />
+        <result column="dept" property="dept" />
+        <result column="status" property="status" />
+        <result column="udel_flag" property="delFlag" />
+        <result column="ucreate_time" property="createTime" />
+        <result column="uupdate_time" property="updateTime" />
+        <collection property="roleList" ofType="com.jade.system.api.domain.SysRole">
+            <id column="role_id" property="roleId" />
+            <result column="role_name" property="roleName" />
+            <result column="role_code" property="roleCode" />
+            <result column="role_desc" property="roleDesc" />
+            <result column="rcreate_time" property="createTime" />
+            <result column="rupdate_time" property="updateTime" />
+        </collection>
+    </resultMap>
+    <select id="getUserVoByUsername" resultMap="userVoResultMap">
+        SELECT sys_user.user_id,
+               sys_user.user_name,
+               sys_user.real_name,
+               sys_user.password,
+               sys_user.avatar,
+               sys_user.email,
+               sys_user.dept,
+               sys_user.status,
+               sys_user.create_time AS ucreate_time,
+               sys_user.update_time AS uupdate_time,
+               sys_user.del_flag    AS udel_flag,
+               r.role_id,
+               r.role_name,
+               r.role_code,
+               r.role_desc,
+               r.create_time        AS rcreate_time,
+               r.update_time        AS rupdate_time
+        FROM sys_user
+                 LEFT JOIN sys_user_role AS ur ON ur.user_id = sys_user.user_id
+                 LEFT JOIN sys_role AS r ON r.role_id = ur.role_id
+        WHERE sys_user.user_name = #{username}
+    </select>
+    <select id="getUserVoById" resultMap="userVoResultMap">
+        SELECT sys_user.user_id,
+               sys_user.user_name,
+               sys_user.real_name,
+               sys_user.password,
+               sys_user.avatar,
+               sys_user.email,
+               sys_user.dept,
+               sys_user.status,
+               sys_user.create_time AS ucreate_time,
+               sys_user.update_time AS uupdate_time,
+               sys_user.del_flag    AS udel_flag,
+               r.role_id,
+               r.role_name,
+               r.role_code,
+               r.role_desc,
+               r.create_time        AS rcreate_time,
+               r.update_time        AS rupdate_time
+        FROM sys_user
+                 LEFT JOIN sys_user_role AS ur ON ur.user_id = sys_user.user_id
+                 LEFT JOIN sys_role AS r ON r.role_id = ur.role_id
+        WHERE sys_user.user_id = #{id}
+    </select>
+    <select id="getUserVosPage" resultMap="baseResultMap">
+        SELECT sys_user.user_id,
+        sys_user.user_name,
+        sys_user.real_name,
+        sys_user.password,
+        sys_user.avatar,
+        sys_user.email,
+        sys_user.dept,
+        sys_user.status,
+        sys_user.create_time AS ucreate_time,
+        sys_user.update_time AS uupdate_time,
+        sys_user.del_flag AS udel_flag
+        FROM sys_user
+        <where>
+            sys_user.del_flag = '0'
+            <if test="query.username != null and query.username != ''">
+                <bind name="usernameLike" value="'%' + query.username + '%'" />
+                and sys_user.user_name LIKE #{usernameLike}
+            </if>
+        </where>
+        ORDER BY sys_user.create_time DESC
+    </select>
+    <select id="selectVoList" resultMap="baseResultMap">
+        SELECT u.user_id,
+        u.user_name,
+        u.real_name,
+        u.password,
+        u.avatar,
+        u.email,
+        u.dept,
+        u.status,
+        u.create_time ucreate_time,
+        u.update_time uupdate_time,
+        u.del_flag
+        FROM sys_user u
+        <where>
+            u.del_flag = '0'
+            <if test="query.username != null and query.username != ''">
+                <bind name="usernameLike" value="'%' + query.username + '%'" />
+                AND u.user_name LIKE #{usernameLike}
+            </if>
+        </where>
+        ORDER BY u.create_time DESC
+    </select>
+</mapper>

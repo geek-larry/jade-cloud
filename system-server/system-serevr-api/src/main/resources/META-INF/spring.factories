@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.jade.system.api.factory.FeignUserFallbackFactory,\
+  com.jade.system.api.factory.FeignLogFallbackFactory

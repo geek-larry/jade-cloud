@@ -1,0 +1,47 @@
+server:
+  port: 9000
+
+spring:
+  cache:
+    type: redis
+  profiles:
+    active: dev
+  application:
+    name: gateway-server
+  cloud:
+    nacos:
+      discovery:
+        namespace: jade300
+        server-addr: localhost:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: system-server
+          uri: lb://system-server
+          predicates:
+            - Path=/system/**
+          filters:
+            - StripPrefix=1
+            - name: BlackListUrlFilter
+        - id: oauth-server
+          uri: lb://oauth-server
+          predicates:
+            - Path=/oauth/**
+          filters:
+            - StripPrefix=1
+
+feign:
+  okhttp:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 10000
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true

@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.jade.common.oauth.service.PermissionService,\
+  com.jade.common.oauth.config.MethodSecurityConfig,\
+  com.jade.common.oauth.handler.CustomAccessDeniedHandler,\
+  com.jade.common.oauth.exception.GlobalExceptionHandler

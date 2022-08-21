@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.jade.common.security.aspect.PreAuthorizeAspect,\
+  com.jade.common.security.interceptor.RequestInterceptor,\
+  com.jade.common.security.service.TokenService,\
+  com.jade.common.security.handler.GlobalExceptionHandler,\
+  com.jade.common.security.feign.FeignAutoConfiguration,\
+  com.jade.common.security.filter.SecurityRequestFilter
