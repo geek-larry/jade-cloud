@@ -24,7 +24,12 @@ spring:
             - Path=/system/**
           filters:
             - StripPrefix=1
-            - name: BlackListUrlFilter
+        - id: auth-server
+          uri: lb://auth-server
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
         - id: oauth-server
           uri: lb://oauth-server
           predicates:

@@ -31,11 +31,6 @@
             <artifactId>system-serevr-api</artifactId>
             <version>3.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.jade</groupId>
-            <artifactId>common-server-security</artifactId>
-            <version>3.0.0</version>
-        </dependency>
     </dependencies>
 
     <build>

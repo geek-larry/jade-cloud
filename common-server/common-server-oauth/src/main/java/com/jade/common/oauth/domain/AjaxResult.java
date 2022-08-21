@@ -1,4 +1,4 @@
-package com.jade.common.core.domain;
+package com.jade.common.oauth.domain;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.http.HttpStatus;

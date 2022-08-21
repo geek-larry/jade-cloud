@@ -21,6 +21,7 @@ public class HeaderInterceptor implements AsyncHandlerInterceptor {
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
+
         String token = TokenUtil.getToken();
         if (StringUtils.isNotEmpty(token)) {
             LoginUserDetail loginUser = AuthUtil.getLoginUser(token);

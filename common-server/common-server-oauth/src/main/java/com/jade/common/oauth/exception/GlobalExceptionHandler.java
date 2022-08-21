@@ -5,7 +5,7 @@ import cn.hutool.http.HttpStatus;
 import com.jade.common.core.exception.BaseException;
 import com.jade.common.core.exception.CustomException;
 import com.jade.common.core.exception.DemoModeException;
-import com.jade.common.core.domain.AjaxResult;
+import com.jade.common.oauth.domain.AjaxResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;

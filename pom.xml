@@ -6,14 +6,12 @@
     <artifactId>jade</artifactId>
     <packaging>pom</packaging>
     <version>3.0.0</version>
-
     <modules>
         <module>common-server</module>
         <module>system-server</module>
         <module>auth-server</module>
         <module>oauth-server</module>
         <module>gateway-server</module>
-        <module>mq-server</module>
     </modules>
 
     <properties>
