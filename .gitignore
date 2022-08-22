@@ -53,11 +53,7 @@ nbdist/
 
 ### maven ###
 target/
-*.war
-*.ear
-*.zip
 *.tar
-*.tar.gz
 *.versionsBackup
 
 ### vscode ###

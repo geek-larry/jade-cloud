@@ -18,11 +18,8 @@ public class Demo {
     @GetMapping("test")
     public String test(){
         
-        
         return "hello world";
         
     }
-
-   
 
 }
