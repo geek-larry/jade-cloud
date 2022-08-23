@@ -1,9 +1,5 @@
 package com.jade.video.util;
 
-import cn.hutool.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
@@ -14,15 +10,21 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import cn.hutool.json.JSONObject;
+
+@SuppressWarnings("deprecation")
 public class FFmpegUtil {
 
     private static final Logger log = LoggerFactory.getLogger(FFmpegUtil.class);
 
-    private static String rootPath;//D:/soft/ffmpeg/bin
+    private static String rootPath;// D:/soft/ffmpeg/bin
 
-//    static {
-//        rootPath = FileMd5Util.getRealPath() + "WEB-INF/classes/ffmpeg";
-//    }
+    // static {
+    // rootPath = FileMd5Util.getRealPath() + "WEB-INF/classes/ffmpeg";
+    // }
 
     /**
      * 获取视频某个时间点的图片
@@ -51,7 +53,7 @@ public class FFmpegUtil {
             command.add("-s");
             command.add(size);
             command.add(output);
-            //开始执行，并不等待返回
+            // 开始执行，并不等待返回
             ProcessBuilder pb = new ProcessBuilder();
             pb.command(command);
             Process p = pb.start();
@@ -78,23 +80,23 @@ public class FFmpegUtil {
             command.add("cmd.exe");
             command.add("/C");
             command.add(rootPath + "/ffmpeg");
-            command.add("-i");              //输入文件路径
+            command.add("-i"); // 输入文件路径
             command.add(filePath);
-            command.add("-y");              //是否覆盖
-            command.add("-ab");             //音频数据流量，32 64 96 128
+            command.add("-y"); // 是否覆盖
+            command.add("-ab"); // 音频数据流量，32 64 96 128
             command.add("32");
-            command.add("-ar");             //声音采样频率 22050
+            command.add("-ar"); // 声音采样频率 22050
             command.add("22050");
-            command.add("-acodec");         //音频编码AAC
+            command.add("-acodec"); // 音频编码AAC
             command.add("aac");
-            command.add("-s");              //指定分辨率，标清，高清；
-//          command.add("640x480");         //标清：480p
-            command.add("1280x720");        //高清：720p
-            command.add("-qscale");         //以数值质量为基础的VBR，范围：0.01-255，越小质量越好
+            command.add("-s"); // 指定分辨率，标清，高清；
+            // command.add("640x480"); //标清：480p
+            command.add("1280x720"); // 高清：720p
+            command.add("-qscale"); // 以数值质量为基础的VBR，范围：0.01-255，越小质量越好
             command.add("10");
-            command.add("-r");              //帧速率，数值： 15 29.97
+            command.add("-r"); // 帧速率，数值： 15 29.97
             command.add("15");
-            command.add(dest);              //目标存储路径
+            command.add(dest); // 目标存储路径
             ProcessBuilder pb = new ProcessBuilder();
             pb.command(command);
             pb.start();
@@ -125,13 +127,14 @@ public class FFmpegUtil {
         boolean find = matcher.find();
         if (find) {
             String res = matcher.group(1);
-            //处理
+            // 处理
             String[] arr = res.split("[.]");
             String t = "";
             String l = "0";
             if (arr.length > 0) {
                 t = arr[0];
-                if (arr.length > 1) l = arr[1];
+                if (arr.length > 1)
+                    l = arr[1];
             }
             try {
                 long tempL = Long.parseLong(l);
@@ -171,23 +174,23 @@ public class FFmpegUtil {
             command.add("cmd.exe");
             command.add("/C");
             command.add(rootPath + "/ffmpeg");
-            command.add("-i");              //输入文件路径
+            command.add("-i"); // 输入文件路径
             command.add(filePath);
-            command.add("-y");              //是否覆盖
-//          command.add("-ab");             //音频数据流量，32 64 96 128
-//          command.add("32K");
-//          command.add("-ar");             //声音采样频率 22050
-//          command.add("22050");
-//          command.add("-acodec");         //音频编码AAC
-//          command.add("aac");
-            command.add("-s");              //指定分辨率，标清，高清；
-            command.add("640x480");         //标清：480p
-//          command.add("1280x720");        //高清：720p
-//          command.add("-qscale");         //以数值质量为基础的VBR，范围：0.01-255，越小质量越好
-//          command.add("10");
-            command.add("-r");              //帧速率，数值： 15 29.97
+            command.add("-y"); // 是否覆盖
+            // command.add("-ab"); //音频数据流量，32 64 96 128
+            // command.add("32K");
+            // command.add("-ar"); //声音采样频率 22050
+            // command.add("22050");
+            // command.add("-acodec"); //音频编码AAC
+            // command.add("aac");
+            command.add("-s"); // 指定分辨率，标清，高清；
+            command.add("640x480"); // 标清：480p
+            // command.add("1280x720"); //高清：720p
+            // command.add("-qscale"); //以数值质量为基础的VBR，范围：0.01-255，越小质量越好
+            // command.add("10");
+            command.add("-r"); // 帧速率，数值： 15 29.97
             command.add("15");
-            command.add(dest);              //目标存储路径
+            command.add(dest); // 目标存储路径
             ProcessBuilder pb = new ProcessBuilder();
             pb.command(command);
             Process p = pb.start();
@@ -202,25 +205,25 @@ public class FFmpegUtil {
             }
             p.waitFor();
             p.destroy();
-            //获得时长/速率/其他meta信息
+            // 获得时长/速率/其他meta信息
             convertToflvHD(filePath, destHD);
             long time = getVideoTime(sb);
             String solution = getVideoResolution(sb);
-            //截取第一秒的图片做封面
+            // 截取第一秒的图片做封面
             catchImage(dest, fileName, solution);
-            result.put("destPath", dest);    //普情FLV存放地址
-            result.put("duration", time);    //时长
-            result.put("destPathHD", destHD);//高清FLV存放地址
-            result.put("solution", solution);//分辨率
+            result.put("destPath", dest); // 普情FLV存放地址
+            result.put("duration", time); // 时长
+            result.put("destPathHD", destHD);// 高清FLV存放地址
+            result.put("solution", solution);// 分辨率
             result.put("imagePath", tempFolder + fileName + "-1-" + solution + ".jpg");
-            //转化完成后进行增加索引
+            // 转化完成后进行增加索引
         } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
     }
 
-    //根据当前视频的分辨率获得高清分辨率信息
+    // 根据当前视频的分辨率获得高清分辨率信息
     public static String getHDSolution(String solution) {
         String rs = "1280x720";
         try {
@@ -247,9 +250,9 @@ public class FFmpegUtil {
         long d1l = d1.getTime();
         filePath = filePath.replaceAll("\\\\", "/");
         JSONObject jo = new JSONObject();
-        String folder = filePath.substring(0, filePath.lastIndexOf("/"));//文件的相对文件夹路径,例如：/attachment/video/
-        String fileName = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf("."));//文件的文件名,例如：sss.mp4
-        String hdDestFolder = folder + "/" + fileName + "_HD";//高清存放路径
+        String folder = filePath.substring(0, filePath.lastIndexOf("/"));// 文件的相对文件夹路径,例如：/attachment/video/
+        String fileName = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf("."));// 文件的文件名,例如：sss.mp4
+        String hdDestFolder = folder + "/" + fileName + "_HD";// 高清存放路径
         String hdDestM3u8Path = hdDestFolder + "/" + fileName + ".m3u8";
         String hdResPath = folder + "/" + fileName + "_HD" + "/" + fileName + ".m3u8";
 
@@ -266,16 +269,16 @@ public class FFmpegUtil {
             command[0] = "cmd.exe";
             command[1] = "/C";
             command[2] = rootPath + "/ffmpeg";
-            command[3] = "-i";              //输入文件路径
+            command[3] = "-i"; // 输入文件路径
             command[4] = filePath;
-            command[5] = "-c:v";            //
+            command[5] = "-c:v"; //
             command[6] = "libx264";
             command[7] = "-c:a";
             command[8] = "aac";
             command[9] = "-strict";
             command[10] = "-2";
             command[11] = "-hls_time";
-//            command[12] = Constant.VIDEO_HLS_TIME + "";
+            // command[12] = Constant.VIDEO_HLS_TIME + "";
             command[13] = "-hls_list_size";
             command[14] = "0";
             command[15] = "-f";
@@ -292,7 +295,7 @@ public class FFmpegUtil {
             while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
-            //获得视频的分辨率，默认分辨率1280x720
+            // 获得视频的分辨率，默认分辨率1280x720
             solution = getVideoResolution(sb);
             duration = getVideoTime(sb);
             p.waitFor();
@@ -301,8 +304,8 @@ public class FFmpegUtil {
             e.printStackTrace();
             log.error(e.getMessage(), e);
         }
-        //通过输出流获得需要的信息
-        //截取第一秒的图片做封面
+        // 通过输出流获得需要的信息
+        // 截取第一秒的图片做封面
         String name = catchImage(filePath, fileName, solution);
         String postPath = folder + "/" + fileName + "_postpath.jpg";
         if (!new File(postPath).exists()) {
@@ -318,7 +321,8 @@ public class FFmpegUtil {
         Date d2 = new Date();
         long d2l = d2.getTime();
         long diff = d2l - d1l;
-        log.debug("\r\n 视频转化转化结束，转化结果为：\r\n 文件路径:" + filePath + " \r\n 耗时: " + (diff / 1000) + "秒 \r\n 返回信息:" + jo.toString());
+        log.debug("\r\n 视频转化转化结束，转化结果为：\r\n 文件路径:" + filePath + " \r\n 耗时: " + (diff / 1000) + "秒 \r\n 返回信息:"
+                + jo.toString());
         return jo;
     }
 
@@ -327,29 +331,29 @@ public class FFmpegUtil {
      */
     public static JSONObject callFFmpeg(String filePath) {
         /**
-         目标：两种分辨率格式，最终都为m3u8,时长固定,切换源，名字一样？
-         1.将源文件转化为两个格式的flv文件，分别存储，
-         ID_HD-->id.flv-->id.m3u8
-         ID_SD-->id.flv-->id.m3u8
-         2.将两个分辨率的flv转化为m3u8格式
-         3.将两个m3u8格式的地址回传回去
+         * 目标：两种分辨率格式，最终都为m3u8,时长固定,切换源，名字一样？
+         * 1.将源文件转化为两个格式的flv文件，分别存储，
+         * ID_HD-->id.flv-->id.m3u8
+         * ID_SD-->id.flv-->id.m3u8
+         * 2.将两个分辨率的flv转化为m3u8格式
+         * 3.将两个m3u8格式的地址回传回去
          */
         log.info("开始转化视频");
         filePath = filePath.replaceAll("\\\\", "/");
         JSONObject jo = new JSONObject();
-//      String basePath = "";//FileUtil.getConfigRealPath();//tomcat 路径,例如：i:/tomcat1/resource/
-        String folder = filePath.substring(0, filePath.lastIndexOf("/"));//文件的相对文件夹路径,例如：/attachment/video/
-        String fileName = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf("."));//文件的文件名,例如：sss.mp4
-//      String sourcePath = basePath+filePath;//文件的绝对路径，源文件
-        String hdDestFolder = folder + "/" + fileName + "_HD";//高清存放路径
+        // String basePath = "";//FileUtil.getConfigRealPath();//tomcat
+        // 路径,例如：i:/tomcat1/resource/
+        String folder = filePath.substring(0, filePath.lastIndexOf("/"));// 文件的相对文件夹路径,例如：/attachment/video/
+        String fileName = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf("."));// 文件的文件名,例如：sss.mp4
+        // String sourcePath = basePath+filePath;//文件的绝对路径，源文件
+        String hdDestFolder = folder + "/" + fileName + "_HD";// 高清存放路径
         String hdDestFlvPath = hdDestFolder + "/" + fileName + ".flv";
         String hdDestM3u8Path = hdDestFolder + "/" + fileName + ".m3u8";
         String hdResPath = folder + "/" + fileName + "_HD" + "/" + fileName + ".m3u8";
-        String sdDestFolder = folder + "/" + fileName + "_SD";//普清存放路径
+        String sdDestFolder = folder + "/" + fileName + "_SD";// 普清存放路径
         String sdDestFlvPath = sdDestFolder + "/" + fileName + ".flv";
         String sdDestM3u8Path = sdDestFolder + "/" + fileName + ".m3u8";
         String sdResPath = folder + "/" + fileName + "_SD" + "/" + fileName + ".m3u8";
-
 
         File destFolderFile = new File(hdDestFolder);
         if (!destFolderFile.isDirectory()) {
@@ -359,7 +363,7 @@ public class FFmpegUtil {
         if (!destFolderFile2.isDirectory()) {
             destFolderFile2.mkdirs();
         }
-        //1. 转化源文件为普清FLV格式
+        // 1. 转化源文件为普清FLV格式
 
         BufferedReader br = null;
         String solution = "";
@@ -369,23 +373,23 @@ public class FFmpegUtil {
             command[0] = "cmd.exe";
             command[1] = "/C";
             command[2] = rootPath + "/ffmpeg";
-            command[3] = "-i";              //输入文件路径
+            command[3] = "-i"; // 输入文件路径
             command[4] = filePath;
-            command[5] = "-y";              //是否覆盖
-//          command[6] = "-ab";             //音频数据流量，32 64 96 128
-//          command[7] = "32K";
-            command[6] = "-ar";             //声音采样频率 22050
+            command[5] = "-y"; // 是否覆盖
+            // command[6] = "-ab"; //音频数据流量，32 64 96 128
+            // command[7] = "32K";
+            command[6] = "-ar"; // 声音采样频率 22050
             command[7] = "22050";
-//          command[10] = "-acodec";            //音频编码AAC
-//          command[11] = "aac";
-            command[8] = "-s";              //指定分辨率，标清，高清；
-            command[9] = "640x480";         //标清：480p
-//          command[14] = "1280x720";       //高清：720p
-//          command[14] = "-qscale";            //以数值质量为基础的VBR，范围：0.01-255，越小质量越好
-//          command[15] = "10";
-            command[10] = "-r";             //帧速率，数值： 15 29.97
+            // command[10] = "-acodec"; //音频编码AAC
+            // command[11] = "aac";
+            command[8] = "-s"; // 指定分辨率，标清，高清；
+            command[9] = "640x480"; // 标清：480p
+            // command[14] = "1280x720"; //高清：720p
+            // command[14] = "-qscale"; //以数值质量为基础的VBR，范围：0.01-255，越小质量越好
+            // command[15] = "10";
+            command[10] = "-r"; // 帧速率，数值： 15 29.97
             command[11] = "15";
-            command[12] = sdDestFlvPath;//目标存储路径
+            command[12] = sdDestFlvPath;// 目标存储路径
             ProcessBuilder pb = new ProcessBuilder();
             pb.command(command);
             Process p = pb.start();
@@ -407,33 +411,33 @@ public class FFmpegUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //2. 转化源文件为高清FLV格式
-        //根据solution获得HD Solution,edit by lixun ,鉴于视频转化低分辨率后失真严重，高清不在转化其他分辨率。
-//      String hdSolution = getHDSolution(solution);
+        // 2. 转化源文件为高清FLV格式
+        // 根据solution获得HD Solution,edit by lixun ,鉴于视频转化低分辨率后失真严重，高清不在转化其他分辨率。
+        // String hdSolution = getHDSolution(solution);
         String hdSolution = solution;
         try {
             String[] command = new String[13];
             command[0] = "cmd.exe";
             command[1] = "/C";
             command[2] = rootPath + "/ffmpeg";
-            command[3] = "-i";              //输入文件路径
+            command[3] = "-i"; // 输入文件路径
             command[4] = filePath;
-            command[5] = "-y";              //是否覆盖
-//          command[6] = "-ab";             //音频数据流量，32 64 96 128
-//          command[7] = "32K";
-            command[6] = "-ar";             //声音采样频率 22050
+            command[5] = "-y"; // 是否覆盖
+            // command[6] = "-ab"; //音频数据流量，32 64 96 128
+            // command[7] = "32K";
+            command[6] = "-ar"; // 声音采样频率 22050
             command[7] = "22050";
-//          command[10] = "-acodec";            //音频编码AAC
-//          command[11] = "aac";
-            command[8] = "-s";              //指定分辨率，标清，高清；
-//          command[13] = "640x480";            //标清：480p
-//          command[7] = "1280x720";        //高清：720p
+            // command[10] = "-acodec"; //音频编码AAC
+            // command[11] = "aac";
+            command[8] = "-s"; // 指定分辨率，标清，高清；
+            // command[13] = "640x480"; //标清：480p
+            // command[7] = "1280x720"; //高清：720p
             command[9] = hdSolution;
-//          command[15] = "-qscale";            //以数值质量为基础的VBR，范围：0.01-255，越小质量越好
-//          command[16] = "10";
-            command[10] = "-r";             //帧速率，数值： 15 29.97
+            // command[15] = "-qscale"; //以数值质量为基础的VBR，范围：0.01-255，越小质量越好
+            // command[16] = "10";
+            command[10] = "-r"; // 帧速率，数值： 15 29.97
             command[11] = "15";
-            command[12] = hdDestFlvPath;                //目标存储路径
+            command[12] = hdDestFlvPath; // 目标存储路径
             ProcessBuilder pb = new ProcessBuilder();
             pb.command(command);
             Process p = pb.start();
@@ -453,22 +457,22 @@ public class FFmpegUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //3. 转化普清FLV为m3u8格式
+        // 3. 转化普清FLV为m3u8格式
         try {
             String[] command = new String[18];
             command[0] = "cmd.exe";
             command[1] = "/C";
             command[2] = rootPath + "/ffmpeg";
-            command[3] = "-i";              //输入文件路径
+            command[3] = "-i"; // 输入文件路径
             command[4] = sdDestFlvPath;
-            command[5] = "-c:v";            //
+            command[5] = "-c:v"; //
             command[6] = "libx264";
             command[7] = "-c:a";
             command[8] = "aac";
             command[9] = "-strict";
             command[10] = "-2";
             command[11] = "-hls_time";
-//            command[12] = Constant.VIDEO_HLS_TIME + "";
+            // command[12] = Constant.VIDEO_HLS_TIME + "";
             command[13] = "-hls_list_size";
             command[14] = "0";
             command[15] = "-f";
@@ -495,22 +499,22 @@ public class FFmpegUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //4. 转化高清FLV为m3u8格式
+        // 4. 转化高清FLV为m3u8格式
         try {
             String[] command = new String[18];
             command[0] = "cmd.exe";
             command[1] = "/C";
             command[2] = rootPath + "/ffmpeg";
-            command[3] = "-i";              //输入文件路径
+            command[3] = "-i"; // 输入文件路径
             command[4] = hdDestFlvPath;
-            command[5] = "-c:v";            //
+            command[5] = "-c:v"; //
             command[6] = "libx264";
             command[7] = "-c:a";
             command[8] = "aac";
             command[9] = "-strict";
             command[10] = "-2";
             command[11] = "-hls_time";
-//            command[12] = Constant.VIDEO_HLS_TIME + "";
+            // command[12] = Constant.VIDEO_HLS_TIME + "";
             command[13] = "-hls_list_size";
             command[14] = "0";
             command[15] = "-f";
@@ -537,8 +541,8 @@ public class FFmpegUtil {
             jo.put("success", false);
         }
 
-        //通过输出流获得需要的信息
-        //截取第一秒的图片做封面
+        // 通过输出流获得需要的信息
+        // 截取第一秒的图片做封面
         String name = catchImage(filePath, fileName, solution);
         String postPath = folder + "/" + fileName + "_postpath.jpg";
         if (!new File(postPath).exists()) {
@@ -548,7 +552,7 @@ public class FFmpegUtil {
         jo.put("postpath", postPath);
         jo.put("success", true);
         jo.put("duration", duration);
-//        jo.element("destpath",resPath);
+        // jo.element("destpath",resPath);
         jo.put("hdPath", hdResPath);
         jo.put("sdPath", sdResPath);
         System.out.println("视频转化转化结束，转化结果为：\r\n" + jo.toString());
@@ -559,8 +563,7 @@ public class FFmpegUtil {
         rootPath = "I:/workspace/ffmpeg/src/main/resources/ffmpeg";
         String file = "d:/abc/avi/4.mp4";
         callFFmpegNew(file);
-//      convertToFlv(file);
+        // convertToFlv(file);
         System.out.println(rootPath);
     }
 }
-
