@@ -1,3 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.jade.common.redis.config.RedisTemplateConfig,\
-  com.jade.common.redis.util.RedisUtil
+  com.jade.common.redis.config.RedisConfiguration

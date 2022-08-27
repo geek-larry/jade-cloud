@@ -1,23 +1,45 @@
 package com.jade.common.redis.util;
 
-import org.springframework.data.redis.core.BoundSetOperations;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundSetOperations;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Component;
+
+import cn.hutool.json.JSONObject;
+
 @Component
 @SuppressWarnings(value = { "unchecked", "rawtypes" })
 public class RedisUtil {
+
     @Resource(name = "redisTemplate")
     public RedisTemplate redisTemplate;
+
+    @Autowired
+    private RedisLockUtil redisLockUtil;
+
+    public boolean tryLock(String key, int expireTime) {
+        final JSONObject lock = new JSONObject();
+        lock.set("id", key);
+        // startTime
+        lock.set("st", System.currentTimeMillis());
+        // keepSeconds
+        lock.set("ks", expireTime);
+        return redisLockUtil.tryLock(key, "", expireTime);
+    }
+
+    public void unLock(String key) {
+        redisLockUtil.releaseLock(key, "");
+    }
 
     /**
      * 缓存基本的对象，Integer、String、实体类等
