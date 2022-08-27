@@ -12,6 +12,7 @@
 
     <modules>
         <module>rabbit-mq</module>
+        <module>rocket-mq</module>
     </modules>
 
 </project>
