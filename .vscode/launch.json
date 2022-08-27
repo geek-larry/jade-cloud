@@ -1,0 +1,72 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch AuthServerApplication",
+            "request": "launch",
+            "mainClass": "com.jade.auth.AuthServerApplication",
+            "projectName": "auth-server"
+        },
+        {
+            "type": "java",
+            "name": "Launch GatewayServerApplication",
+            "request": "launch",
+            "console": "internalConsole",
+            "mainClass": "com.jade.gateway.GatewayServerApplication",
+            "projectName": "gateway-server"
+        },
+        {
+            "type": "java",
+            "name": "Launch OauthServerApplication",
+            "request": "launch",
+            "mainClass": "com.jade.oauth.OauthServerApplication",
+            "projectName": "oauth-server"
+        },
+        {
+            "type": "java",
+            "name": "Launch RabbitMqApplication",
+            "request": "launch",
+            "mainClass": "com.jade.rabbitmq.RabbitMqApplication",
+            "projectName": "rabbit-mq"
+        },
+        {
+            "type": "java",
+            "name": "Launch SystemServerApplication",
+            "request": "launch",
+            "console": "internalConsole",
+            "mainClass": "com.jade.system.biz.SystemServerApplication",
+            "projectName": "system-server-biz"
+        },
+        {
+            "type": "java",
+            "name": "Launch VideoServerApplication",
+            "request": "launch",
+            "mainClass": "com.jade.video.VideoServerApplication",
+            "projectName": "video-server"
+        },
+        {
+            "type": "java",
+            "name": "Launch Stream2Image",
+            "request": "launch",
+            "mainClass": "com.jade.video.stream.Stream2Image",
+            "projectName": "video-server"
+        },
+        {
+            "type": "java",
+            "name": "Launch FFmpegUtil",
+            "request": "launch",
+            "mainClass": "com.jade.video.util.FFmpegUtil",
+            "projectName": "video-server"
+        }
+    ]
+}

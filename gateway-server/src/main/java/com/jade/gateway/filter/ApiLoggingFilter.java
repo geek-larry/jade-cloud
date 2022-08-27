@@ -43,7 +43,7 @@ public class ApiLoggingFilter implements GlobalFilter, Ordered {
                 }
                 // 当前仅记录日志，后续可以添加日志队列，来过滤请求慢的接口
                 if (log.isDebugEnabled()) {
-                    log.debug("来自IP地址：{}的请求接口：{}，响应状态码：{}，请求耗时：{}ms", ip, api, code, executeTime);
+                    log.info("来自IP地址：{}的请求接口：{}，响应状态码：{}，请求耗时：{}ms", ip, api, code, executeTime);
                 }
             }
         }));

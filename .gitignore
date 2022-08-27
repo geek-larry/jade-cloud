@@ -57,7 +57,7 @@ target/
 *.versionsBackup
 
 ### vscode ###
-.vscode
+#.vscode
 
 ### logs ###
 logs

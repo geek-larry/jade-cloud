@@ -15,6 +15,7 @@
         <module>gateway-server</module>
         <module>mq-server</module>
         <module>video-server</module>
+        <module>demo</module>
     </modules>
 
     <properties>
@@ -26,10 +27,10 @@
         <spring-cloud.version>2021.0.3</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
         <lombok.version>1.18.20</lombok.version>
-        <hutool.version>5.8.3</hutool.version>
+        <hutool.version>5.8.5</hutool.version>
         <commons-lang3.version>3.10</commons-lang3.version>
-        <fastjson.version>1.2.80</fastjson.version>
-        <aspectjweaver.version>1.9.5</aspectjweaver.version>
+        <fastjson.version>2.0.1</fastjson.version>
+        <aspectjweaver.version>1.9.9.1</aspectjweaver.version>
         <jjwt.version>0.9.1</jjwt.version>
         <transmittable-thread-local.version>2.12.2</transmittable-thread-local.version>
         <dynamic-ds.version>3.5.1</dynamic-ds.version>
