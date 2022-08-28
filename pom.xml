@@ -16,6 +16,7 @@
         <module>mq-server</module>
         <module>video-server</module>
         <module>demo</module>
+        <module>nosql-server</module>
     </modules>
 
     <properties>
