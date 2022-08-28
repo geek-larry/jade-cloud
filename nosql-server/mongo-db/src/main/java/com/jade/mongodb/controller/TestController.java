@@ -26,6 +26,8 @@ public class TestController {
         }
         List<User> l1 = userService.findAllUser();
         List<User> l2 = userService.findAllUserByName("larry");
+        System.out.println(l1);
+        System.out.println(l2);
         return "ok";
     }
 }

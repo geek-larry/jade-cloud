@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Component
+@SuppressWarnings({"rawtypes","unchecked"})
 public class Producer {
     @Autowired
     private KafkaTemplate kafkaTemplate;

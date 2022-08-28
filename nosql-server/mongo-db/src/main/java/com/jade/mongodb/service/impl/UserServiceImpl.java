@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         Update update= new Update().set("username", user.getUsername()).set("passWord", user.getPassword());
         //更新查询返回结果的第一个数据
         UpdateResult u = mongoTemplate.updateFirst(query,update,User.class);
-        System.out.println(UpdateResult.class);
+        System.out.println(u);
     }
 
     @Override
