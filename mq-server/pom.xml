@@ -13,6 +13,7 @@
     <modules>
         <module>rabbit-mq</module>
         <module>rocket-mq</module>
+        <module>kafka-mq</module>
     </modules>
 
 </project>

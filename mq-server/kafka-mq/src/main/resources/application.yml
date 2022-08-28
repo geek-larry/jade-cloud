@@ -1,0 +1,26 @@
+server:
+  servlet:
+    context-path: /
+  port: 9020
+spring:
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    producer:
+      #每批次发送消息的数量
+      batch-size: 16
+      retries: 0
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      auto-offset-reset: latest
+      #是否开启自动提交
+      enable-auto-commit: true
+      #自动提交的时间间隔
+      auto-commit-interval: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      #在/usr/local/etc/kafka/consumer.properties中有配置
+      group-id: test-consumer-group
+
+
