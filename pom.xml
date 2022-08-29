@@ -17,6 +17,7 @@
         <module>video-server</module>
         <module>demo</module>
         <module>nosql-server</module>
+        <module>thread-server</module>
     </modules>
 
     <properties>
