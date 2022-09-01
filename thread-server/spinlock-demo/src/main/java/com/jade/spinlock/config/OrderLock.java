@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 @Component
 public class OrderLock {
 
-    private volatile int num;
+    private int num;
     ReentrantLock lock = new ReentrantLock();
     Condition con = lock.newCondition();
 
