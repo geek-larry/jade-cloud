@@ -4,10 +4,14 @@ import net.coobird.thumbnailator.Thumbnails;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.Java2DFrameConverter;
+import org.bytedeco.javacv.OpenCVFrameConverter;
+import org.bytedeco.opencv.opencv_core.Mat;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,6 +21,7 @@ import java.nio.file.Paths;
 public class FrameService {
 
     public void frame() throws IOException {
+
         String dir = "files/";
 
         String videoPath = "qq.mp4";
@@ -59,6 +64,29 @@ public class FrameService {
             ImageIO.write(bi, imagemat, output);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public BufferedImage matToBufferedImage(org.opencv.core.Mat frame) {
+        int type = 0;
+        if (frame.channels() == 1) {
+            type = BufferedImage.TYPE_BYTE_GRAY;
+        } else if (frame.channels() == 3) {
+            type = BufferedImage.TYPE_3BYTE_BGR;
+        }
+        BufferedImage image = new BufferedImage(frame.width(), frame.height(), type);
+        WritableRaster raster = image.getRaster();
+        DataBufferByte dataBuffer = (DataBufferByte) raster.getDataBuffer();
+        byte[] data = dataBuffer.getData();
+        frame.get(0, 0, data);
+        return image;
+    }
+
+    public Mat bufferedImageToMat(BufferedImage bi) {
+        try (OpenCVFrameConverter.ToMat cv = new OpenCVFrameConverter.ToMat()) {
+            try (Java2DFrameConverter converter = new Java2DFrameConverter()) {
+                return cv.convertToMat(converter.convert(bi));
+            }
         }
     }
 }

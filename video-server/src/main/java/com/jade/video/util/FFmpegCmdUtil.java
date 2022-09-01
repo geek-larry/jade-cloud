@@ -1,5 +1,9 @@
 package com.jade.video.util;
 
+import cn.hutool.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
@@ -10,15 +14,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import cn.hutool.json.JSONObject;
-
 @SuppressWarnings("deprecation")
-public class FFmpegUtil {
+public class FFmpegCmdUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(FFmpegUtil.class);
+    private static final Logger log = LoggerFactory.getLogger(FFmpegCmdUtil.class);
 
     private static String rootPath;// D:/soft/ffmpeg/bin
 
@@ -322,7 +321,7 @@ public class FFmpegUtil {
         long d2l = d2.getTime();
         long diff = d2l - d1l;
         log.debug("\r\n 视频转化转化结束，转化结果为：\r\n 文件路径:" + filePath + " \r\n 耗时: " + (diff / 1000) + "秒 \r\n 返回信息:"
-                + jo.toString());
+                + jo);
         return jo;
     }
 

@@ -13,7 +13,6 @@ import java.io.IOException;
 @RestController
 @RequiredArgsConstructor
 public class VideoController {
-
     private final FrameService frameService;
     private final H265Transcode h265Transcode;
 
