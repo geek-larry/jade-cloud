@@ -17,7 +17,7 @@ public class BeanUtil implements BeanFactoryPostProcessor {
 
     @Override
     public void postProcessBeanFactory(@Nullable ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        com.jade.common.core.util.SpringUtil.beanFactory = beanFactory;
+        BeanUtil.beanFactory = beanFactory;
     }
 
 }

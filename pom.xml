@@ -19,6 +19,8 @@
         <module>nosql-server</module>
         <module>thread-server</module>
         <module>ffmpeg-server</module>
+        <module>design-patterns</module>
+        <module>algorithm-demo</module>
     </modules>
 
     <properties>
