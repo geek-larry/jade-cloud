@@ -21,6 +21,7 @@
         <module>ffmpeg-server</module>
         <module>design-patterns</module>
         <module>algorithm-demo</module>
+        <module>influx-server</module>
     </modules>
 
     <properties>
