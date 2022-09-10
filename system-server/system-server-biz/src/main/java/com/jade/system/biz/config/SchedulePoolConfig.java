@@ -23,6 +23,7 @@ public class SchedulePoolConfig implements SchedulingConfigurer {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
         scheduler.setPoolSize(10);
         scheduler.setThreadNamePrefix("schedule_task_");
+        // 线程池关闭前最大等待时间 确保最后一定关闭
         scheduler.setAwaitTerminationSeconds(600);
         scheduler.setWaitForTasksToCompleteOnShutdown(true);
         return scheduler;
