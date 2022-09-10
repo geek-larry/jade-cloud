@@ -1,12 +1,12 @@
 package com.jade.common.redis.util;
 
-import java.util.concurrent.TimeUnit;
-
 import org.springframework.data.redis.connection.RedisStringCommands;
 import org.springframework.data.redis.connection.ReturnType;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.types.Expiration;
+
+import java.util.concurrent.TimeUnit;
 
 public class RedisLockUtil {
 
@@ -14,7 +14,7 @@ public class RedisLockUtil {
 		this.redisTemplate = redisTemplate;
 	}
 
-	private RedisTemplate<String, Object> redisTemplate;
+	private final RedisTemplate<String, Object> redisTemplate;
 
 	private static final byte[] SCRIPT_RELEASE_LOCK = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end".getBytes();
 
