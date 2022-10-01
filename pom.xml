@@ -15,7 +15,6 @@
         <module>gateway-server</module>
         <module>demo</module>
         <module>thread-server</module>
-        <module>design-patterns</module>
         <module>algorithm-demo</module>
     </modules>
 
