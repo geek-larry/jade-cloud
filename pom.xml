@@ -15,11 +15,9 @@
         <module>gateway-server</module>
         <module>mq-server</module>
         <module>demo</module>
-        <module>nosql-server</module>
         <module>thread-server</module>
         <module>design-patterns</module>
         <module>algorithm-demo</module>
-        <module>influx-server</module>
     </modules>
 
     <properties>
