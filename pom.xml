@@ -13,9 +13,7 @@
         <module>auth-server</module>
         <module>oauth-server</module>
         <module>gateway-server</module>
-        <module>demo</module>
         <module>thread-server</module>
-        <module>algorithm-demo</module>
     </modules>
 
     <properties>
